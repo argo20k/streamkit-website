@@ -1,59 +1,50 @@
+// import './styles/00-default-template.css';
+
 
 function Preview() {
   return (
     <>
-        <title>Discord Streamkit Overlay Tester</title>
         <div id="root">
-            <div className="Voice_voiceContainer__adk9M">
-            <ul className="Voice_voiceStates__a121W">
-                <li className="Voice_voiceState__OCoZh">
+            <div className="Voice_voiceContainer__adk9M voice_container">
+            <ul className="Voice_voiceStates__a121W voice_states">
+                <li className="Voice_voiceState__OCoZh voice_state" data-userid="123456789098765432">
                 <img
-                    className="Voice_avatar__htiqH"
-                    src="https://cpwebassets.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png"
+                    className="Voice_avatar__htiqH voice_avatar"
+                    src="https://cdn.discordapp.com/embed/avatars/0.png"
                     alt=""
                 />
-                <div className="Voice_user__8fGwX">
-                    <span className="Voice_name__TALd9">だんまり</span>
+                <div className="Voice_user__8fGwX voice_username">
+                    <span className="Voice_name__TALd9" style={{color: 'rgb(255, 255, 255)', fontSize: '14px', backgroundColor: 'rgba(30, 33, 36, 0.95)'}}>not speaking</span>
                 </div>
                 </li>
-                <li className="Voice_voiceState__OCoZh">
+                <li className="Voice_voiceState__OCoZh wrapper_speaking voice_state" data-userid="234567890987654321">
                 <img
-                    className="Voice_avatar__htiqH Voice_avatarSpeaking__lE+4m"
-                    src="https://cpwebassets.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png"
+                    className="Voice_avatar__htiqH Voice_avatarSpeaking__lE+4m voice_avatar"
+                    src="https://cdn.discordapp.com/embed/avatars/0.png"
                     alt=""
                 />
-                <div className="Voice_user__8fGwX">
-                    <span className="Voice_name__TALd9">しゃべり</span>
+                <div className="Voice_user__8fGwX voice_username">
+                    <span className="Voice_name__TALd9" style={{color: 'rgb(255, 255, 255)', fontSize: '14px', backgroundColor: 'rgba(30, 33, 36, 0.95)'}}>speaking</span>
                 </div>
                 </li>
-                <li className="Voice_voiceState__OCoZh">
+                <li className="Voice_voiceState__OCoZh self_mute voice_state" data-userid="345678909876543210">
                 <img
-                    className="Voice_avatar__htiqH speakTest01"
-                    src="https://cpwebassets.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png"
+                    className="Voice_avatar__htiqH voice_avatar"
+                    src="https://cdn.discordapp.com/embed/avatars/0.png"
                     alt=""
                 />
-                <div className="Voice_user__8fGwX">
-                    <span className="Voice_name__TALd9">ダミー01</span>
+                <div className="Voice_user__8fGwX voice_username">
+                    <span className="Voice_name__TALd9" style={{color: 'rgb(255, 255, 255)', fontSize: '14px', backgroundColor: 'rgba(30, 33, 36, 0.95)'}}>muted</span>
                 </div>
                 </li>
-                <li className="Voice_voiceState__OCoZh">
+                <li className="Voice_voiceState__OCoZh self_mute self_deaf voice_state" data-userid="456789098765432101">
                 <img
-                    className="Voice_avatar__htiqH speakTest02"
-                    src="https://cpwebassets.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png"
+                    className="Voice_avatar__htiqH voice_avatar"
+                    src="https://cdn.discordapp.com/embed/avatars/0.png"
                     alt=""
                 />
-                <div className="Voice_user__8fGwX">
-                    <span className="Voice_name__TALd9">ダミー02</span>
-                </div>
-                </li>
-                <li className="Voice_voiceState__OCoZh">
-                <img
-                    className="Voice_avatar__htiqH speakTest03"
-                    src="https://cpwebassets.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png"
-                    alt=""
-                />
-                <div className="Voice_user__8fGwX">
-                    <span className="Voice_name__TALd9">ダミー03</span>
+                <div className="Voice_user__8fGwX voice_username">
+                    <span className="Voice_name__TALd9" style={{color: 'rgb(255, 255, 255)', fontSize: '14px', backgroundColor: 'rgba(30, 33, 36, 0.95)'}}>deafened</span>
                 </div>
                 </li>
             </ul>
