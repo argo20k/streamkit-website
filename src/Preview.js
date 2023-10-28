@@ -1,4 +1,4 @@
-// import './styles/00-default-template.css';
+import './styles/00-default-template.css';
 
 
 function Preview() {

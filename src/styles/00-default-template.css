@@ -31,7 +31,7 @@
 	--voicestates_margin_right: -0.5em;
 
 /* 		voice state */
-/* 	--voicestate_arrangement: column; */
+	--voicestate_arrangement: column;
 	--voicestate_margin_bottom: calc(1em * 4/7);
 	--voicestate_margin_right: 1em;
 
@@ -48,7 +48,7 @@
 	--username_background_color: rgba(30, 33, 36, 0.95);
 /* 	--username_speaking_background_color: rgba(46, 204, 113, 0.95); */
 	--username_border_radius: calc(1em * 3/14);
-	--username_color: #FFF;
+	--username_color: #d11717;
 	--username_font: gg sans;
 	--username_font_size: 16px;
 	--username_font_weight: 600;
