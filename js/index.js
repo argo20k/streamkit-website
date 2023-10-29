@@ -1,5 +1,5 @@
 $(document).ready(function () {
-	var result_css_dir = 'styles/streamkit/test1.css';
+	var result_css_dir = 'styles/streamkit/00-default-template.css';
 	fetch(result_css_dir)
 		.then((res) => res.text())
 		.then((text) => {
@@ -8,18 +8,19 @@ $(document).ready(function () {
 		.catch((e) => console.error(e));
 
 	var template_config_file = 'config.json';
-
 	fetch(template_config_file)
 		.then((res) => res.text())
 		.then((text) => {
-			var myObject = JSON.parse(text);
+			var templates = JSON.parse(text);
+			templates.forEach((template) => {
+				document.head.innerHTML += `<link rel="stylesheet" href=${template.file_path} />`;
 
-			for (const name in myObject) {
-				if (Object.hasOwnProperty.call(myObject, name)) {
-					const element = myObject[name];
-					console.log(element.name);
-				}
-			}
+				var select = document.getElementById('selectTemplate');
+				var el = document.createElement('option');
+				el.textContent = template.name;
+				el.value = template.name;
+				select.appendChild(el);
+			});
 		})
 		.catch((e) => console.error(e));
 });

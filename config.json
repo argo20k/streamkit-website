@@ -1,5 +1,9 @@
 [
-	{ "id": "00", "name": "default", "file_path": "styles/streamkit/test1.css" },
+	{
+		"id": "00",
+		"name": "default",
+		"file_path": "styles/streamkit/00-default-template.css"
+	},
 	{
 		"id": "91",
 		"name": "icons",
