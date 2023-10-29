@@ -1,0 +1,4 @@
+[
+	{ "movies": { "api": "api name", "key": "value of key" } },
+	{ "music": { "api": "api name", "key": "value of key" } }
+]
