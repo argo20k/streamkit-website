@@ -38,5 +38,10 @@ $(document).ready(async function () {
 		const css = await getCSSText(template_file_path);
 		// dynamically updates result_css with appropriate template selected from dropdown
 		$('#result_css').val(css);
+		// $('#iframe').contents().find('head').html('<div> blah </div>');
+		$('#iframe')
+			.contents()
+			.find('#streamkit_css')
+			.attr('href', template_file_path);
 	});
 });

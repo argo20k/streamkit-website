@@ -5,6 +5,11 @@
 		"file_path": "styles/streamkit/00-default-template.css"
 	},
 	{
+		"id": "01",
+		"name": "default red",
+		"file_path": "styles/streamkit/01-test.css"
+	},
+	{
 		"id": "91",
 		"name": "icons",
 		"file_path": "styles/streamkit/91-icons.css"
