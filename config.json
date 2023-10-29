@@ -1,4 +1,18 @@
 [
-	{ "movies": { "api": "api name", "key": "value of key" } },
-	{ "music": { "api": "api name", "key": "value of key" } }
+	{ "id": "00", "name": "default", "file_path": "styles/streamkit/test1.css" },
+	{
+		"id": "91",
+		"name": "icons",
+		"file_path": "styles/streamkit/91-icons.css"
+	},
+	{
+		"id": "92",
+		"name": "looping avatar animation",
+		"file_path": "styles/streamkit/92-looping-avatar-animation.css"
+	},
+	{
+		"id": "93",
+		"name": "avatar transition animation",
+		"file_path": "styles/streamkit/93-avatar-transition-animation.css"
+	}
 ]

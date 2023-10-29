@@ -13,7 +13,13 @@ $(document).ready(function () {
 		.then((res) => res.text())
 		.then((text) => {
 			var myObject = JSON.parse(text);
-			console.log(myObject);
+
+			for (const name in myObject) {
+				if (Object.hasOwnProperty.call(myObject, name)) {
+					const element = myObject[name];
+					console.log(element.name);
+				}
+			}
 		})
 		.catch((e) => console.error(e));
 });
