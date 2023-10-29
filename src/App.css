@@ -1,10 +1,12 @@
-body {
+.App {
 	background-color: #282c34;
+}
+
+.App-header {
 	height: 100vh;
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	overflow: hidden;
 }
 
 .result_area {
@@ -40,4 +42,6 @@ body {
   background: repeating-conic-gradient(rgb(34, 36, 38) 0 25%,rgb(24, 26, 27) 0 50%) 50% /32px 32px;
   background: repeating-conic-gradient(#eee 0 25%,#fff 0 50%) 50% /32px 32px; */
 	background: repeating-conic-gradient(#aaa 0 25%, #ccc 0 50%) 50% /32px 32px;
+	/* overflow: hidden; */
+	overflow: clip;
 }
