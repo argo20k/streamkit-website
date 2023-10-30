@@ -42,3 +42,9 @@ body {
   background: repeating-conic-gradient(#eee 0 25%,#fff 0 50%) 50% /32px 32px; */
 	background: repeating-conic-gradient(#aaa 0 25%, #ccc 0 50%) 50% /32px 32px;
 }
+
+iframe {
+	border: none;
+	height: 100%;
+	width: 100%;
+}

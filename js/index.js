@@ -1,41 +1,62 @@
-async function getConfig(url) {
-	const response = await fetch(url);
-	return response.json();
-}
+//
+//	foundational functions
+//
 
-async function getCSSText(url) {
-	const response = await fetch(url);
-	return response.text();
-}
-
-$(document).ready(async function () {
-	const tempalte_list = await getConfig('config.json');
-	const css = await getCSSText(tempalte_list[0].file_path);
-	$('#result_css').val(css);
-	tempalte_list.forEach((template) => {
-		// populates selectTemplate dropdown
-		// adds all streamkit css files to page, so they are saved an accessible
+// adds streamkit css styles to index.html, so the styles, and text in the files are accessible to fetch later
+function ApplyStylesToIndex(config_template_list) {
+	config_template_list.forEach((template) => {
 		document.head.innerHTML += `<link rel="stylesheet" href=${template.file_path} />`;
-		var select = document.getElementById('selectTemplate');
-		var element = document.createElement('option');
-		element.textContent = template.name; // name as name so easy to read ui
-		element.value = template.file_path; // value as file_path so can be linked easy later
-		select.appendChild(element); // adds html element to index.html
 	});
+}
 
-	// event catcher for selectTemplate dropdown
-	$('#selectTemplate').change(async function () {
-		// 'this' keyword refers to selectTemplate dropdown - line above
-		// this.name would be the text in the selectTemplate
-		// this.value is like the id - and was also set as the file_path
-		var template_file_path = this.value;
-		const css = await getCSSText(template_file_path);
-		// updates result_css with appropriate file
-		$('#result_css').val(css);
-		// updates preview_html with appropriate file
-		$('#iframe')
-			.contents()
-			.find('#streamkit_css')
-			.attr('href', template_file_path);
+//
+//	main functions
+//
+
+// will run once the entire page (images or iframes), not just the DOM, is ready
+$(document).ready(async function () {
+	const config_file = await getFile('config.json');
+	const config_json = await config_file.json();
+	const default_css_file = await getFile(config_json[0].file_path);
+	const default_css_text = await default_css_file.text();
+	ApplyStylesToIndex(config_json);
+
+	async function getFile(url) {
+		const response = await fetch(url);
+		return response;
+	}
+
+	function getTextInput() {
+		return $('input[id=avatar_height_text_input]').val();
+	}
+
+	async function generateCSS() {
+		var adjusted_css_text = default_css_text.replace(/--avatar_height:[^;]*;/, `--avatar_height: ${getTextInput() || '64'}px;`);
+		return adjusted_css_text;
+	}
+
+	function updateCSSPreview(css_text) {
+		// update result_css
+		$('#result_css').val(css_text);
+
+		//update result_preview
+		var streamkit_css_exists = $('#result_preview').contents().find('#streamkit_css').length; // element.length is 0 if not found, 1 if found
+		if (streamkit_css_exists) {
+			$('#result_preview').contents().find('#streamkit_css').remove();
+		}
+		$('#result_preview').contents().find('head').append(`<style id='streamkit_css'>${css_text}</style>`);
+	}
+
+	//
+	//	inital and event handlers
+	//
+
+	var css_text = await generateCSS();
+	updateCSSPreview(css_text);
+
+	// text input event handler
+	$('input[id=avatar_height_text_input]').on('keyup', async function () {
+		css_text = await generateCSS();
+		updateCSSPreview(css_text);
 	});
 });
