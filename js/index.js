@@ -8,37 +8,31 @@ async function getCSSText(url) {
 	return response.text();
 }
 
-async function start() {
-	// this function runs when the page is ready
-	const config = await getConfig('config.json');
-	var tempalte_list = config;
+$(document).ready(async function () {
+	const tempalte_list = await getConfig('config.json');
 	const css = await getCSSText(tempalte_list[0].file_path);
 	$('#result_css').val(css);
-}
-
-$(document).ready(async function () {
-	start();
-	const config = await getConfig('config.json');
-
-	var tempalte_list = config;
 	tempalte_list.forEach((template) => {
+		// populates selectTemplate dropdown
 		// adds all streamkit css files to page, so they are saved an accessible
 		document.head.innerHTML += `<link rel="stylesheet" href=${template.file_path} />`;
-		// populates selectTemplate dropdown
 		var select = document.getElementById('selectTemplate');
 		var element = document.createElement('option');
 		element.textContent = template.name; // name as name so easy to read ui
 		element.value = template.file_path; // value as file_path so can be linked easy later
-		select.appendChild(element);
+		select.appendChild(element); // adds html element to index.html
 	});
 
-	// change events for selectTemplate dropdown
+	// event catcher for selectTemplate dropdown
 	$('#selectTemplate').change(async function () {
+		// 'this' keyword refers to selectTemplate dropdown - line above
+		// this.name would be the text in the selectTemplate
+		// this.value is like the id - and was also set as the file_path
 		var template_file_path = this.value;
 		const css = await getCSSText(template_file_path);
-		// dynamically updates result_css with appropriate template selected from dropdown
+		// updates result_css with appropriate file
 		$('#result_css').val(css);
-		// $('#iframe').contents().find('head').html('<div> blah </div>');
+		// updates preview_html with appropriate file
 		$('#iframe')
 			.contents()
 			.find('#streamkit_css')
