@@ -15,14 +15,6 @@ function ApplyStylesToIndex(config_template_list) {
 
 // will run once the entire page (images or iframes), not just the DOM, is ready
 $(document).ready(async function () {
-	const config_file = await getFile('config.json');
-	const config_json = await config_file.json();
-	const html_config = generateHTMLConfig();
-
-	const default_css_file = await getFile(config_json[0].file_path);
-	const default_css_text = await default_css_file.text();
-	ApplyStylesToIndex(config_json);
-
 	async function getFile(url) {
 		const response = await fetch(url);
 		return response;
@@ -58,8 +50,14 @@ $(document).ready(async function () {
 		});
 		return mod_checkbox_element;
 	}
-	html_config;
+
 	function generateHTMLConfig(default_css_text) {
+		// "label_text": "username width",
+		// "css_property_key": "username_box_width",
+		// "default_base_value": "auto",
+		// "default_mod_value": "100px",
+		// "is_mod": "true",
+		// "id": "0"
 		let html_config = [];
 		$('form input, form select').each(function (index) {
 			let input = $(this);
@@ -77,12 +75,19 @@ $(document).ready(async function () {
 				default_mod_value: 'none',
 			});
 		});
+		console.log(html_config);
 		return html_config;
 	}
 
+	function generateInputOptions() {
+		input_options_config_json.forEach((option) => {
+			$('#input_options').append($(`<label for="mod_checkbox_${option['css_property_key']}">${option['label_text']}:</label>`));
+			$('#input_options').append($(`<input type="checkbox" name="${option['css_property_key']}" id="mod_checkbox_${option['css_property_key']}" />`));
+			$('#input_options').append($(`<input type="text" id="${option['css_property_key']}" value="${option['default_base_value']}" /><br />`));
+		});
+	}
+
 	async function generateCSS() {
-		// 50 is hard coded, make sure this default value is grabbed from the original template instead
-		// return adjusted_css_text;
 		let adjusted_css_text = default_css_text;
 		option_values = getInputValues();
 		option_values.forEach((element) => {
@@ -119,6 +124,14 @@ $(document).ready(async function () {
 	//	inital
 	//
 
+	const config_json = await (await getFile('config.json')).json();
+	const input_options_config_json = await (await getFile('input-options-config.json')).json();
+	const default_css_file = await getFile(config_json[0].file_path);
+	const default_css_text = await default_css_file.text();
+	ApplyStylesToIndex(config_json);
+
+	generateInputOptions();
+	const html_config = generateHTMLConfig();
 	let css_text = await generateCSS();
 	updateCSSPreview(css_text);
 	updateModOptions();

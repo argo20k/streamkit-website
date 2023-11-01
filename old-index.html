@@ -9,23 +9,28 @@
 		<script src="js/index.js"></script>
 	</head>
 	<body>
-		<form class="options">
-			<label for="radio-1">text field:</label><br />
-			<input type="text" id="test1" /><br />
-			<!-- <input type="radio" id="radio-1" name="radio_option" />
-			<label for="radio-1">option 1</label><br />
-			<input type="radio" id="radio-2" name="radio_option" />
-			<label for="radio-2">option 2</label><br />
-			<input type="checkbox" id="checkbox" />
-			<label for="radio-2">checkbox</label><br />
-			<input type="button" id="button" value="button" /> -->
+		<!-- options -->
+		<form id="input_options">
+			<!-- mod options -->
+			<label for="mod_checkbox_username_box_width">username width:</label>
+			<input type="checkbox" name="username_box_width" id="mod_checkbox_username_box_width" />
+			<input type="text" id="username_box_width" value="auto" /><br />
+
+			<label for="mod_checkbox_username_box_max_width">username max width:</label>
+			<input type="checkbox" name="username_box_max_width" id="mod_checkbox_username_box_max_width" />
+			<input type="text" id="username_box_max_width" value="none" /><br />
 		</form>
+
+		<!-- result -->
+		<!-- <div class="result_css">
+			<textarea id="result_css" readonly></textarea>
+		</div> -->
 		<div class="result_area">
 			<div class="result_css">
 				<textarea id="result_css" readonly></textarea>
 			</div>
 			<div class="result_preview">
-				<iframe id="iframe" src="preview.html"></iframe>
+				<iframe id="result_preview" src="preview.html"></iframe>
 			</div>
 		</div>
 	</body>
