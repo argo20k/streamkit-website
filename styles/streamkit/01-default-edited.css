@@ -425,13 +425,13 @@ li[class$='voice_state'][class*='speaking'] span[class*='name'] {
 }
 
 :root {
-	--mute_icon: url('/assets/mute.png');
-	--servermute_icon: url('https://i.imgur.com/dGLktVK.png');
-	--serverdeaf_icon: url('https://i.imgur.com/PIzZueQ.png');
-	--mute_deaf_icon: url('https://i.imgur.com/MuYZsfA.png');
-	--mute_serverdeaf_icon: url('https://i.imgur.com/ahiYmuD.png');
-	--servermute_deaf_icon: url('https://i.imgur.com/B75U9Qo.png');
-	--servermute_serverdeaf_icon: url('https://i.imgur.com/cNJoKKP.png');
+	--mute_icon: url('assets/mute.png');
+	--servermute_icon: url('assets/servermute.png');
+	--serverdeaf_icon: url('assets/serverdeaf.png');
+	--mute_deaf_icon: url('assets/mute-deaf.png');
+	--mute_serverdeaf_icon: url('assets/mute-serverdeaf.png');
+	--servermute_deaf_icon: url('assets/servermute-deaf.png');
+	--servermute_serverdeaf_icon: url('assets/servermute-serverdeaf.png');
 
 	/* 		recommended not to change */
 	--inherited_username_line_height: var(--username_line_height, calc(93 / 70));
