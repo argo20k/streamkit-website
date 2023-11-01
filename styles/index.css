@@ -1,5 +1,4 @@
 body {
-	background-color: #282c34;
 	background-color: #181a1b;
 	height: 100vh;
 	display: flex;
@@ -7,6 +6,8 @@ body {
 	justify-content: center;
 	overflow: hidden;
 	flex-direction: column;
+	font-family: sans-serif;
+	color: #e8e6e3;
 }
 
 .result_preview {
@@ -36,12 +37,11 @@ iframe {
 }
 
 .result_css textarea {
-	outline: none;
-	border-width: 0px;
-
 	box-sizing: border-box;
+	border: 0;
 	height: 100%;
 	width: 100%;
+	outline-color: transparent;
 
 	font-family: 'Roboto Mono', Courier, monospace;
 	resize: none;
@@ -51,7 +51,10 @@ iframe {
 }
 
 .result_css textarea:focus {
-	box-shadow: inset 0 0 0 2px #006da3;
+	outline-color: #006da3;
+	outline-style: solid;
+	outline-width: 2px;
+	outline-offset: -2px;
 }
 
 ::-webkit-scrollbar-thumb {
@@ -62,5 +65,4 @@ iframe {
 }
 ::-webkit-scrollbar {
 	background-color: #202324 !important;
-	border-width: 0 4px 8px 12px;
 }
