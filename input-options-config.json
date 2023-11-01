@@ -43,5 +43,25 @@
 		"is_mod": true,
 		"is_editable": false,
 		"id": 4
+	},
+	{
+		"label_text": "vertical align",
+		"css_property_key": "voicestates_vertical_align",
+		"default_base_value": "start",
+		"default_mod_value": "n/a",
+		"is_mod": false,
+		"is_editable": false,
+		"multiple_choice_options": ["start", "center", "end"],
+		"id": 5
+	},
+	{
+		"label_text": "horizontal align",
+		"css_property_key": "voicestates_horizontal_align",
+		"default_base_value": "left",
+		"default_mod_value": "n/a",
+		"is_mod": false,
+		"is_editable": false,
+		"multiple_choice_options": ["left", "center", "right"],
+		"id": 6
 	}
 ]

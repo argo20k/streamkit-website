@@ -16,10 +16,8 @@
 	--green_transparent: rgba(46, 204, 113, 0.95);
 
 	/* 		voice states */
-	/* 	--voicestates_vertical_align: start; */ /* radio - vertical align */
-	/* 	--voicestates_vertical_align: center; */ /* radio - vertical align */
-	/* 	--voicestates_vertical_align: end; */ /* radio - vertical align */
-	/* 	--voicestates_horizontal_align: left; */ /* radio - horizontal align */
+	--voicestates_vertical_align: start; /* radio - vertical align */
+	--voicestates_horizontal_align: left; /* radio - horizontal align */
 	/* 	--voicestates_horizontal_align: center; */ /* radio - horizontal align */
 	/* 	--voicestates_horizontal_align: right; */ /* radio - horizontal align */
 	/* 	--voicestates_arrangement: column; */ /* checkbox - vertical arrangement */
