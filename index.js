@@ -15,8 +15,13 @@ $(document).ready(async function () {
 
 	function getInputValues() {
 		let input_values = [];
+		let html_value = '';
 		input_options_config_json.forEach((element) => {
-			let html_value = $(`input[id=${element['css_property_key']}]`).val();
+			if (element['is_editable']) {
+				html_value = $(`input[id=${element['css_property_key']}]`).val();
+			} else {
+				html_value = $(`input[id=mod_checkbox_${element['css_property_key']}]`).val();
+			}
 			let option_value = {
 				id: element['id'],
 				css_property_key: element['css_property_key'],
@@ -31,9 +36,15 @@ $(document).ready(async function () {
 		input_options_config_json.forEach((option) => {
 			$('#input_options').append($(`<label for="mod_checkbox_${option['css_property_key']}">${option['label_text']}: </label>`));
 			if (option['is_mod']) {
-				$('#input_options').append($(`<input type="checkbox" name="${option['css_property_key']}" id="mod_checkbox_${option['css_property_key']}" />`));
+				if (option['is_editable']) {
+					$('#input_options').append($(`<input type="checkbox" name="${option['css_property_key']}" id="mod_checkbox_${option['css_property_key']}" />`));
+				} else {
+					$('#input_options').append($(`<input type="checkbox" name="${option['css_property_key']}" id="mod_checkbox_${option['css_property_key']}" /><br />`));
+				}
 			}
-			$('#input_options').append($(`<input type="text" id="${option['css_property_key']}" /><br />`));
+			if (option['is_editable']) {
+				$('#input_options').append($(`<input type="text" id="${option['css_property_key']}" /><br />`));
+			}
 		});
 	}
 
@@ -60,12 +71,21 @@ $(document).ready(async function () {
 			if (element['is_mod']) {
 				// update mod options
 				let mod_checkbox_element = $(`input[id=${getModCheckboxDOMID(element)}]`);
-				if (mod_checkbox_element.is(':checked')) {
-					$(`input[id=${element['css_property_key']}]`).prop('readonly', false);
-					$(`input[id=${element['css_property_key']}]`).val(element['default_mod_value']);
+				if (!element['is_editable']) {
+					if (mod_checkbox_element.is(':checked')) {
+						$(`input[id=mod_checkbox_${element['css_property_key']}]`).val(element['default_mod_value']);
+					} else {
+						$(`input[id=mod_checkbox_${element['css_property_key']}]`).val(element['default_base_value']);
+					}
 				} else {
-					$(`input[id=${element['css_property_key']}]`).prop('readonly', true);
-					$(`input[id=${element['css_property_key']}]`).val(element['default_base_value']);
+					console.log(element['css_property_key']);
+					if (mod_checkbox_element.is(':checked')) {
+						$(`input[id=${element['css_property_key']}]`).prop('readonly', false);
+						$(`input[id=${element['css_property_key']}]`).val(element['default_mod_value']);
+					} else {
+						$(`input[id=${element['css_property_key']}]`).prop('readonly', true);
+						$(`input[id=${element['css_property_key']}]`).val(element['default_base_value']);
+					}
 				}
 			} else {
 				// update base options
