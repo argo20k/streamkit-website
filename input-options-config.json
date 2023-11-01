@@ -1,0 +1,14 @@
+[
+	{
+		"id": "0",
+		"label_text": "username width",
+		"css_property_key": "username_box_width",
+		"is_mod": "true"
+	},
+	{
+		"id": "1",
+		"label_text": "username max width",
+		"css_property_key": "username_box_max_width",
+		"is_mod": "true"
+	}
+]

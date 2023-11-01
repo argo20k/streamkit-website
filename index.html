@@ -9,10 +9,25 @@
 		<script src="js/index.js"></script>
 	</head>
 	<body>
+		<!-- options -->
 		<form class="options">
-			<label for="avatar_height_text_input">avatar height:</label>
-			<input type="text" id="avatar_height_text_input" value="222" />
+			<!-- base options -->
+			<!-- <label for="avatar_height_text_input">avatar height:</label>
+			<input type="text" id="avatar_height_text_input" value="22" /><br /> -->
+			<!-- mod options -->
+			<label for="mod_checkbox_username_box_width">username width:</label>
+			<input type="checkbox" name="username_box_width" id="mod_checkbox_username_box_width" />
+			<input type="text" id="username_box_width" value="auto" /><br />
+
+			<label for="mod_checkbox_username_box_max_width">username max width:</label>
+			<input type="checkbox" name="username_box_max_width" id="mod_checkbox_username_box_max_width" />
+			<input type="text" id="username_box_max_width" value="none" />
 		</form>
+
+		<!-- result -->
+		<!-- <div class="result_css">
+			<textarea id="result_css" readonly></textarea>
+		</div> -->
 		<div class="result_area">
 			<div class="result_css">
 				<textarea id="result_css" readonly></textarea>

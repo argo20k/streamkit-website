@@ -1,6 +1,11 @@
 [
 	{
-		"id": "01",
+		"id": "0",
+		"name": "default",
+		"file_path": "styles/streamkit/00-default.css"
+	},
+	{
+		"id": "1",
 		"name": "default red",
 		"file_path": "styles/streamkit/01-default-edited.css"
 	}
