@@ -1,18 +1,26 @@
 [
 	{
+		"label_text": "username font size",
+		"css_property_key": "username_font_size",
+		"default_base_value": "14px",
+		"default_mod_value": "n/a",
+		"is_mod": false,
+		"id": 2
+	},
+	{
 		"label_text": "username width",
 		"css_property_key": "username_box_width",
 		"default_base_value": "auto",
 		"default_mod_value": "100px",
-		"is_mod": "true",
-		"id": "0"
+		"is_mod": true,
+		"id": 0
 	},
 	{
 		"label_text": "username max width",
 		"css_property_key": "username_box_max_width",
 		"default_base_value": "none",
 		"default_mod_value": "100px",
-		"is_mod": "true",
-		"id": "1"
+		"is_mod": true,
+		"id": 1
 	}
 ]

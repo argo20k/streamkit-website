@@ -29,9 +29,11 @@ $(document).ready(async function () {
 
 	function generateInputOptions() {
 		input_options_config_json.forEach((option) => {
-			$('#input_options').append($(`<label for="mod_checkbox_${option['css_property_key']}">${option['label_text']}:</label>`));
-			$('#input_options').append($(`<input type="checkbox" name="${option['css_property_key']}" id="mod_checkbox_${option['css_property_key']}" />`));
-			$('#input_options').append($(`<input type="text" id="${option['css_property_key']}" value="${option['default_base_value']}" /><br />`));
+			$('#input_options').append($(`<label for="mod_checkbox_${option['css_property_key']}">${option['label_text']}: </label>`));
+			if (option['is_mod']) {
+				$('#input_options').append($(`<input type="checkbox" name="${option['css_property_key']}" id="mod_checkbox_${option['css_property_key']}" />`));
+			}
+			$('#input_options').append($(`<input type="text" id="${option['css_property_key']}" /><br />`));
 		});
 	}
 
@@ -43,24 +45,30 @@ $(document).ready(async function () {
 		});
 	}
 
-	function updateModOptions(specific_mod_element) {
-		// updating because of one element being changed (mod checkbox triggers)
+	function updateInputOptions(specific_mod_element) {
 		let temp_input_options_config_json = input_options_config_json;
 		if (specific_mod_element) {
+			// updating a specific element (typically mod element)
 			input_options_config_json.forEach((element) => {
 				if (element['css_property_key'] === specific_mod_element) {
 					temp_input_options_config_json = [element];
 				}
 			});
 		}
-		// updating from all elements (initial)
+		// updating elements
 		temp_input_options_config_json.forEach((element) => {
-			let mod_checkbox_element = $(`input[id=${getModCheckboxDOMID(element)}]`);
-			if (mod_checkbox_element.is(':checked')) {
-				$(`input[id=${element['css_property_key']}]`).prop('readonly', false);
-				$(`input[id=${element['css_property_key']}]`).val(element['default_mod_value']);
+			if (element['is_mod']) {
+				// update mod options
+				let mod_checkbox_element = $(`input[id=${getModCheckboxDOMID(element)}]`);
+				if (mod_checkbox_element.is(':checked')) {
+					$(`input[id=${element['css_property_key']}]`).prop('readonly', false);
+					$(`input[id=${element['css_property_key']}]`).val(element['default_mod_value']);
+				} else {
+					$(`input[id=${element['css_property_key']}]`).prop('readonly', true);
+					$(`input[id=${element['css_property_key']}]`).val(element['default_base_value']);
+				}
 			} else {
-				$(`input[id=${element['css_property_key']}]`).prop('readonly', true);
+				// update base options
 				$(`input[id=${element['css_property_key']}]`).val(element['default_base_value']);
 			}
 		});
@@ -83,13 +91,13 @@ $(document).ready(async function () {
 	//
 
 	const input_options_config_json = await (await getFile('input-options-config.json')).json();
-	const default_css_text = await (await getFile('styles/streamkit/00-default.css')).text();
+	const default_css_text = await (await getFile('styles/00-default.css')).text();
 	let current_css_text;
 
 	generateInputOptions();
+	updateInputOptions();
 	await generateCSS();
 	updateCSSPreview();
-	updateModOptions();
 
 	//
 	//	event handlers
@@ -106,7 +114,7 @@ $(document).ready(async function () {
 	input_options_config_json.forEach((element) => {
 		let mod_checkbox_element = $(`input[id=${getModCheckboxDOMID(element)}]`);
 		mod_checkbox_element.change(async function () {
-			updateModOptions(element['css_property_key']);
+			updateInputOptions(element['css_property_key']); // maybe split the update input options into update mod options, and update base options
 			await generateCSS();
 			updateCSSPreview();
 		});

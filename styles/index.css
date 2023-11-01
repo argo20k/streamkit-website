@@ -1,11 +1,25 @@
 body {
 	background-color: #282c34;
+	background-color: #181a1b;
 	height: 100vh;
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	overflow: hidden;
 	flex-direction: column;
+}
+
+.result_preview {
+	height: 100%;
+	width: 100%;
+	border-radius: 0 8px 8px 0;
+	background: repeating-conic-gradient(#aaa 0 25%, #ccc 0 50%) 50% /32px 32px;
+}
+
+iframe {
+	border: none;
+	height: 100%;
+	width: 100%;
 }
 
 .result_area {
@@ -16,35 +30,37 @@ body {
 	align-items: center;
 	justify-content: center;
 }
-
 .result_css {
 	height: 100%;
 	width: 100%;
 }
 
 .result_css textarea {
-	border-width: 0;
+	outline: none;
+	border-width: 0px;
+
 	box-sizing: border-box;
-	background-color: hsl(200deg, 10%, 80%, 0.3);
+	height: 100%;
+	width: 100%;
+
 	font-family: 'Roboto Mono', Courier, monospace;
 	resize: none;
-	width: 100%;
-	height: 100%;
 	border-radius: 8px 0 0 8px;
+	color: rgba(200, 195, 188, 0.3);
+	background-color: rgb(58, 62, 65);
 }
 
-.result_preview {
-	height: 100%;
-	width: 100%;
-	border-radius: 0 8px 8px 0;
-	/* background-color: rgb(26, 26, 26);
-  background: repeating-conic-gradient(rgb(34, 36, 38) 0 25%,rgb(24, 26, 27) 0 50%) 50% /32px 32px;
-  background: repeating-conic-gradient(#eee 0 25%,#fff 0 50%) 50% /32px 32px; */
-	background: repeating-conic-gradient(#aaa 0 25%, #ccc 0 50%) 50% /32px 32px;
+.result_css textarea:focus {
+	box-shadow: inset 0 0 0 2px #006da3;
 }
 
-iframe {
-	border: none;
-	height: 100%;
-	width: 100%;
+::-webkit-scrollbar-thumb {
+	background-color: #454a4d !important;
+}
+::-webkit-scrollbar-thumb:hover {
+	background-color: #575e62 !important;
+}
+::-webkit-scrollbar {
+	background-color: #202324 !important;
+	border-width: 0 4px 8px 12px;
 }

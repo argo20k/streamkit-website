@@ -66,11 +66,11 @@
 	--username_border_radius: calc(1em * 3 / 14);
 	--username_color: #fff;
 	--username_font: gg sans;
-	--username_font_size: 14px;
+	--username_font_size: updating; /* base - 14px */
 	--username_font_weight: 600;
 	--username_line_height: calc(93 / 70);
-	--username_box_max_width: see-input-options-config.json; /* mod - 100px */
-	--username_box_width: see-input-options-config.json; /* mod - 100px */
+	--username_box_max_width: done; /* mod - none - 100px */
+	--username_box_width: done; /* mod - auto - 100px */
 	--username_margin_top: 0em;
 	--username_margin_bottom: 0em;
 	--username_margin_left: calc(1em * 8 / 14);
@@ -101,7 +101,7 @@ div[class$='voice_container'] {
 
 	display: flex;
 	font-family: var(--username_font, gg sans);
-	font-size: var(--username_font_size, 16px);
+	font-size: var(--username_font_size, 14px);
 	font-weight: var(--username_font_weight, 600);
 	line-height: var(--username_line_height, calc(93 / 70));
 
