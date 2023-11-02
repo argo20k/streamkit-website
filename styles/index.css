@@ -66,3 +66,9 @@ iframe {
 ::-webkit-scrollbar {
 	background-color: #202324 !important;
 }
+
+/* form {
+	display: flex;
+	flex-direction: column;
+	align-items: end;
+} */

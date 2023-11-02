@@ -18,16 +18,14 @@
 	/* 		voice states */
 	--voicestates_vertical_align: start; /* done - base - start - [center, end] */
 	--voicestates_horizontal_align: left; /* done - base - left - [center, right] */
-	/* 	--voicestates_arrangement: column; */ /* checkbox - vertical arrangement */
-	/* 	--voicestates_arrangement: row; */ /* checkbox - horizontal arrangement */
+	--voicestates_arrangement: column; /* done - base - column - row */
 	--voicestates_margin_top: 1em;
 	--voicestates_margin_bottom: calc(1em * 3 / 7);
 	--voicestates_margin_left: 1em;
 	--voicestates_margin_right: -0.5em;
 
 	/* 		voice state */
-	/* 	--voicestate_arrangement: row; */ /* checkbox - voice state horizontal arrangement */
-	/* 	--voicestate_arrangement: column; */ /* checkbox - voice state vertical arrangement */
+	--voicestate_arrangement: row; /* done - base - row - column */
 	/* 	--voicestate_display: flex; */ /* checkbox - show all voice states */
 	/* 	--voicestate_display: none; */ /* checkbox - hide all voice states */
 	--voicestate_margin_bottom: calc(1em * 4 / 7);
@@ -40,20 +38,16 @@
 	/* 		avatar */
 	--avatar_border_width: calc(var(--calculated_avatar_height_width) * 0.075);
 	--avatar_border_color: rgba(0, 0, 0, 0);
-	--avatar_speaking_border_color: rgba(46, 204, 113, 0.95);
+	--avatar_speaking_border_color: rgba(46, 204, 113, 0.95); /* done - mod - rgba(46, 204, 113, 0.95) - var(--inherited_avatar_border_color) */
 	--avatar_border_radius: 50%;
 	--avatar_height: 50px;
 	--avatar_width: 50px;
-	/* 	--avatar_content: normal; */ /* checkbox - disable custom avatar */
-	/* 	--avatar_content: url('https://cdn.discordapp.com/embed/avatars/1.png'); */ /* checkbox - enable custom avatar */
-	/* 	--avatar_content: no_default_value_decided_yet; */ /* text input - custom avatar url */
-	/* 	--avatar_speaking_content: normal; */ /* checkbox - disable custom speaking avatar */
-	/* 	--avatar_speaking_content: url('https://cdn.discordapp.com/embed/avatars/4.png'); */ /* checkbox - enable custom speaking avatar */
-	/* 	--avatar_speaking_content: no_default_value_decided_yet; */ /* text input - custom speaking avatar url */
-	--avatar_display: block; /* done - checkbox - block - none */
+	--avatar_content: normal; /* done - mod - normal - url('https://cdn.discordapp.com/embed/avatars/1.png') */
+	--avatar_speaking_content: var(--inherited_avatar_content); /* done - mod - var(--inherited_avatar_content) - url('https://cdn.discordapp.com/embed/avatars/4.png') */
+	--avatar_display: block; /* done - mod - block - none */
 
 	/* 		username */
-	--username_display: flex; /* done - checkbox - flex - none */
+	--username_display: flex; /* done - mod - flex - none */
 	--username_background_color: rgba(30, 33, 36, 0.95);
 	/* 	--username_speaking_background_color: var(--inherited_username_background_color); */ /* checkbox - disable speaking colour */
 	/* 	--username_speaking_background_color: rgba(46, 204, 113, 0.95); */ /* checkbox - enable speaking colour */
@@ -76,6 +70,8 @@
 	--calculated_avatar_height_width: var(--avatar_width, var(--avatar_height, 50px));
 
 	--inherited_voicestates_horizontal_align: var(--voicestates_horizontal_align, left);
+	--inherited_avatar_border_color: var(--avatar_border_color, rgba(0, 0, 0, 0));
+	--inherited_avatar_content: var(--avatar_content, normal);
 	--inherited_username_box_max_width: var(--username_box_max_width, initial);
 	--inherited_username_box_width: var(--username_box_width, initial);
 	--inherited_username_background_color: var(--username_background_color, rgba(30, 33, 36, 0.95));
@@ -176,9 +172,9 @@ img[class$='avatar'] {
 li[class$='voice_state'][class*='speaking'] img[class$='avatar'] {
 	border-color: #3ba53b;
 
-	border-color: var(--avatar_speaking_border_color, rgba(46, 204, 113, 0.95));
+	border-color: var(--avatar_speaking_border_color, var(--inherited_avatar_border_color));
 
-	content: var(--avatar_speaking_content, normal);
+	content: var(--avatar_speaking_content, var(--inherited_avatar_content));
 }
 
 div[class$='username'] {

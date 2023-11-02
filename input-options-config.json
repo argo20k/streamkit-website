@@ -1,5 +1,70 @@
 [
 	{
+		"label_text": "vertical align",
+		"css_property_key": "voicestates_vertical_align",
+		"default_base_value": "start",
+		"default_mod_value": "n/a",
+		"is_mod": false,
+		"is_editable": false,
+		"multiple_choice_options": ["start", "center", "end"],
+		"id": 5
+	},
+	{
+		"label_text": "horizontal align",
+		"css_property_key": "voicestates_horizontal_align",
+		"default_base_value": "left",
+		"default_mod_value": "n/a",
+		"is_mod": false,
+		"is_editable": false,
+		"multiple_choice_options": ["left", "center", "right"],
+		"id": 6
+	},
+	{
+		"label_text": "voice states arrangement",
+		"css_property_key": "voicestates_arrangement",
+		"default_base_value": "column",
+		"default_mod_value": "row",
+		"is_mod": true,
+		"is_editable": false,
+		"id": 7
+	},
+	{
+		"label_text": "voice state arrangement",
+		"css_property_key": "voicestate_arrangement",
+		"default_base_value": "row",
+		"default_mod_value": "column",
+		"is_mod": true,
+		"is_editable": false,
+		"id": 8
+	},
+	{
+		"label_text": "hide avatars",
+		"css_property_key": "avatar_display",
+		"default_base_value": "block",
+		"default_mod_value": "none",
+		"is_mod": true,
+		"is_editable": false,
+		"id": 3
+	},
+	{
+		"label_text": "custom avatar image",
+		"css_property_key": "avatar_content",
+		"default_base_value": "normal",
+		"default_mod_value": "url('https://cdn.discordapp.com/embed/avatars/1.png')",
+		"is_mod": true,
+		"is_editable": true,
+		"id": 9
+	},
+	{
+		"label_text": "custom speaking avatar image",
+		"css_property_key": "avatar_speaking_content",
+		"default_base_value": "var(--inherited_avatar_content)",
+		"default_mod_value": "url('https://cdn.discordapp.com/embed/avatars/4.png')",
+		"is_mod": true,
+		"is_editable": true,
+		"id": 10
+	},
+	{
 		"label_text": "username width",
 		"css_property_key": "username_box_width",
 		"default_base_value": "auto",
@@ -27,15 +92,6 @@
 		"id": 2
 	},
 	{
-		"label_text": "hide avatars",
-		"css_property_key": "avatar_display",
-		"default_base_value": "block",
-		"default_mod_value": "none",
-		"is_mod": true,
-		"is_editable": false,
-		"id": 3
-	},
-	{
 		"label_text": "hide usernames",
 		"css_property_key": "username_display",
 		"default_base_value": "flex",
@@ -43,25 +99,5 @@
 		"is_mod": true,
 		"is_editable": false,
 		"id": 4
-	},
-	{
-		"label_text": "vertical align",
-		"css_property_key": "voicestates_vertical_align",
-		"default_base_value": "start",
-		"default_mod_value": "n/a",
-		"is_mod": false,
-		"is_editable": false,
-		"multiple_choice_options": ["start", "center", "end"],
-		"id": 5
-	},
-	{
-		"label_text": "horizontal align",
-		"css_property_key": "voicestates_horizontal_align",
-		"default_base_value": "left",
-		"default_mod_value": "n/a",
-		"is_mod": false,
-		"is_editable": false,
-		"multiple_choice_options": ["left", "center", "right"],
-		"id": 6
 	}
 ]
