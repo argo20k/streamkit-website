@@ -121,6 +121,15 @@ $(document).ready(async function () {
 				// set radio + on/off styles to default (sets parent div to default value)
 				option_parent_div.val(element['default_base_value']);
 			}
+			if (!element['is_editable'] && !element['is_mod']) {
+				// set radio styles to default (select radio of default base value)
+				option_parent_div.children().each(function () {
+					// console.log($(this).val() === element['default_base_value']);
+					if ($(this).val() === element['default_base_value']) {
+						$(this).prop('checked', true);
+					}
+				});
+			}
 		});
 	}
 
