@@ -1,16 +1,8 @@
-//
-//	main functions
-//
-
-// will run once the entire page (images or iframes), not just the DOM, is ready
+// will run once the entire page (including images and iframes, not just the DOM), is ready
 $(document).ready(async function () {
 	async function getFile(url) {
 		const response = await fetch(url);
 		return response;
-	}
-
-	function getModCheckboxDOMID(html_element) {
-		return `mod_checkbox_${html_element['css_property_key']}`;
 	}
 
 	function getOptionValues() {
@@ -65,7 +57,7 @@ $(document).ready(async function () {
 		input_options_config_json.forEach((element) => {
 			let option_parent_div = $(`#${element['css_property_key']}`);
 			if (element['css_property_key'] === specific_option.attr('name')) {
-				option_parent_div.val(specific_option.val());
+				option_parent_div.val(specific_option.val() || element['default_base_value']);
 			}
 		});
 	}
@@ -110,6 +102,7 @@ $(document).ready(async function () {
 			let element_editable_element = option_parent_div.children(`input[name="${element['css_property_key']}"]`);
 			if (element['is_editable']) {
 				// set editable element styles to default  (usually text input element)
+				element_editable_element.attr('placeholder', element['default_base_value']);
 				element_editable_element.val(element['default_base_value']);
 				option_parent_div.val(element_editable_element.val());
 			}
