@@ -13,105 +13,113 @@ $(document).ready(async function () {
 		return `mod_checkbox_${html_element['css_property_key']}`;
 	}
 
-	function getInputValues() {
-		let input_values = [];
+	function getOptionValues() {
+		let option_values = [];
 		let html_value = '';
 		input_options_config_json.forEach((element) => {
-			if (!element['is_mod'] && !element['is_editable']) {
-				// iterate through all multiple choice options under that radio group (name), and find which one is checked,
-				// and get the id of that option, and set the html_value to the value of that option
-				$(`#${element['css_property_key']}`)
-					.children()
-					.each(function () {
-						if ($(this).is(':checked')) {
-							html_value = $(this).val();
-						}
-					});
-			} else {
-				if (element['is_editable']) {
-					html_value = $(`input[id=${element['css_property_key']}]`).val();
-				} else {
-					html_value = $(`input[id=mod_checkbox_${element['css_property_key']}]`).val();
-				}
-			}
+			let option_parent_div = $(`#${element['css_property_key']}`); // change name to option_parent_div - option_mod_checkbox_element
+
+			html_value = option_parent_div.val();
 			let option_value = {
 				id: element['id'],
 				css_property_key: element['css_property_key'],
 				html_value: html_value,
 			};
-			input_values.push(option_value);
+			option_values.push(option_value);
 		});
-		return input_values;
+		return option_values;
 	}
 
-	function generateInputOptions() {
+	function generateOptions() {
 		input_options_config_json.forEach((option) => {
-			$('#input_options').append($(`<label for="mod_checkbox_${option['css_property_key']}">${option['label_text']}: </label>`));
+			$('#input_options').append($(`<div id="${option['css_property_key']}"></div>`));
+			div = $(`#${option['css_property_key']}`);
+
+			div.append($(`<label for="${option['css_property_key']}">${option['label_text']}: </label>`));
 			if (option['is_mod']) {
-				if (option['is_editable']) {
-					// enable/disable - allows editing - mod styles
-					$('#input_options').append($(`<input type="checkbox" name="${option['css_property_key']}" id="mod_checkbox_${option['css_property_key']}" />`));
-				} else {
-					// enable/disable - directly changes - mod styles
-					$('#input_options').append($(`<input type="checkbox" name="${option['css_property_key']}" id="mod_checkbox_${option['css_property_key']}" /><br />`));
-				}
+				// enable/disable - mod styles
+				div.append($(`<input type="checkbox" name="mod_checkbox_${option['css_property_key']}" />`));
 			} else {
 				if (!option['is_editable']) {
 					// multiple choice radios styles
-					$('#input_options').append($(`<div id="${option['css_property_key']}"></div>`));
 					option['multiple_choice_options'].forEach((multiple_choice_option) => {
-						$(`#${option['css_property_key']}`).append($(`<input type="radio" name="${option['css_property_key']}" value="${multiple_choice_option}" />`));
+						div.append($(`<input type="radio" name="radio_${option['css_property_key']}" value="${multiple_choice_option}" />`));
 					});
 				}
 			}
 			if (option['is_editable']) {
 				// text inputs for editable base and mod styles
-				$('#input_options').append($(`<input type="text" id="${option['css_property_key']}" /><br />`));
+				div.append($(`<input type="text" name="${option['css_property_key']}" />`));
 			}
 		});
 	}
 
 	async function generateCSS() {
-		current_css_text = default_css_text;
-		let input_values = getInputValues();
+		let input_values = getOptionValues();
 		input_values.forEach((element) => {
 			current_css_text = current_css_text.replace(new RegExp(`--${element.css_property_key}:[^;]*;`), `--${element.css_property_key}: ${element.html_value};`);
 		});
 	}
 
-	function updateInputOptions(specific_mod_element) {
-		let temp_input_options_config_json = input_options_config_json;
-		if (specific_mod_element) {
-			// updating a specific element (typically mod element)
-			input_options_config_json.forEach((element) => {
-				if (element['css_property_key'] === specific_mod_element) {
-					temp_input_options_config_json = [element];
+	function setOptionValue(specific_option) {
+		input_options_config_json.forEach((element) => {
+			let option_parent_div = $(`#${element['css_property_key']}`);
+			if (element['css_property_key'] === specific_option.attr('name')) {
+				option_parent_div.val(specific_option.val());
+			}
+		});
+	}
+
+	function setOptionToDefault(specific_option, input_type) {
+		let specific_option_css_property_key = 'none';
+		input_options_config_json.forEach((element) => {
+			if (input_type === 'checkbox') {
+				specific_option_css_property_key = specific_option.attr('name').replace(new RegExp(`mod_checkbox_`), '');
+			} else if (input_type === 'radio') {
+				specific_option_css_property_key = specific_option.attr('name').replace(new RegExp(`radio_`), '');
+			}
+			let option_parent_div = $(`#${element['css_property_key']}`);
+			let element_editable_element = option_parent_div.children(`input[name="${element['css_property_key']}"]`);
+			if (element['css_property_key'] === specific_option_css_property_key) {
+				if (input_type === 'checkbox') {
+					if (specific_option.is(':checked')) {
+						// base/mod fall back value (||) for non-editable mods, that do not have a .val(), from the UI element (text input), to get from the previous line
+						element_editable_element.prop('readonly', false);
+						element_editable_element.val(element['default_mod_value']);
+						option_parent_div.val(element_editable_element.val() || element['default_mod_value']);
+					} else {
+						element_editable_element.prop('readonly', true);
+						element_editable_element.val(element['default_base_value']);
+						option_parent_div.val(element_editable_element.val() || element['default_base_value']);
+					}
+				} else if (input_type === 'radio') {
+					option_parent_div.children().each(function () {
+						if ($(this).is(':checked')) {
+							option_parent_div.val($(this).val());
+						}
+					});
 				}
-			});
-		}
-		// updating elements
-		temp_input_options_config_json.forEach((element) => {
+			}
+		});
+	}
+
+	function setAllOptionsToDefault() {
+		// setting all elements
+		input_options_config_json.forEach((element) => {
+			let option_parent_div = $(`#${element['css_property_key']}`);
+			let element_editable_element = option_parent_div.children(`input[name="${element['css_property_key']}"]`);
+			if (element['is_editable']) {
+				// set editable element styles to default  (usually text input element)
+				element_editable_element.val(element['default_base_value']);
+				option_parent_div.val(element_editable_element.val());
+			}
 			if (element['is_mod']) {
-				// update mod options
-				let mod_checkbox_element = $(`input[id=${getModCheckboxDOMID(element)}]`);
-				if (!element['is_editable']) {
-					if (mod_checkbox_element.is(':checked')) {
-						$(`input[id=mod_checkbox_${element['css_property_key']}]`).val(element['default_mod_value']);
-					} else {
-						$(`input[id=mod_checkbox_${element['css_property_key']}]`).val(element['default_base_value']);
-					}
-				} else {
-					if (mod_checkbox_element.is(':checked')) {
-						$(`input[id=${element['css_property_key']}]`).prop('readonly', false);
-						$(`input[id=${element['css_property_key']}]`).val(element['default_mod_value']);
-					} else {
-						$(`input[id=${element['css_property_key']}]`).prop('readonly', true);
-						$(`input[id=${element['css_property_key']}]`).val(element['default_base_value']);
-					}
-				}
-			} else {
-				// update base options
-				$(`input[id=${element['css_property_key']}]`).val(element['default_base_value']);
+				// set mods to readonly by default (since mods should be disabled by default)
+				element_editable_element.prop('readonly', true);
+			}
+			if (!element['is_editable']) {
+				// set radio + on/off styles to default (sets parent div to default value)
+				option_parent_div.val(element['default_base_value']);
 			}
 		});
 	}
@@ -134,10 +142,10 @@ $(document).ready(async function () {
 
 	const input_options_config_json = await (await getFile('input-options-config.json')).json();
 	const default_css_text = await (await getFile('styles/00-default.css')).text();
-	let current_css_text;
+	let current_css_text = default_css_text;
 
-	generateInputOptions();
-	updateInputOptions();
+	generateOptions();
+	setAllOptionsToDefault();
 	await generateCSS();
 	updateCSSPreview();
 
@@ -145,25 +153,27 @@ $(document).ready(async function () {
 	//	event handlers
 	//
 
-	// form change event handler
-	$('form').on('input', async function () {
-		await generateCSS();
-		updateCSSPreview();
+	input_options_config_json.forEach(async (element) => {
+		let option_parent_div = $(`#${element['css_property_key']}`);
+		let element_mod_checkbox_element = option_parent_div.children('input[name^="mod_checkbox_"]');
+		let radio_base_element = option_parent_div.children('input[name^="radio_"]');
+		let text_input_element = option_parent_div.children(`input[name="${element['css_property_key']}"]`);
+
+		// input element event handlers
+		element_mod_checkbox_element.on('input', async function () {
+			setOptionToDefault(element_mod_checkbox_element, 'checkbox');
+		});
+		radio_base_element.on('input', async function () {
+			setOptionToDefault(radio_base_element, 'radio');
+		});
+		text_input_element.on('input', async function () {
+			setOptionValue(text_input_element);
+		});
 	});
 
-	// mod check box event handler
-	input_options_config_json.forEach((element) => {
-		let mod_checkbox_element = $(`input[id=${getModCheckboxDOMID(element)}]`);
-		let temp_element = '';
-		if (element['is_mod']) {
-			temp_element = mod_checkbox_element;
-		} else {
-			temp_element = $(`div[id=${element['css_property_key']}]`);
-		}
-		temp_element.change(async function () {
-			updateInputOptions(element['css_property_key']);
-			await generateCSS();
-			updateCSSPreview();
-		});
+	// form event handler
+	$(`#input_options`).on('input', async function () {
+		await generateCSS();
+		updateCSSPreview();
 	});
 });

@@ -16,10 +16,8 @@
 	--green_transparent: rgba(46, 204, 113, 0.95);
 
 	/* 		voice states */
-	--voicestates_vertical_align: start; /* radio - vertical align */
-	--voicestates_horizontal_align: left; /* radio - horizontal align */
-	/* 	--voicestates_horizontal_align: center; */ /* radio - horizontal align */
-	/* 	--voicestates_horizontal_align: right; */ /* radio - horizontal align */
+	--voicestates_vertical_align: start; /* done - base - start - [center, end] */
+	--voicestates_horizontal_align: left; /* done - base - left - [center, right] */
 	/* 	--voicestates_arrangement: column; */ /* checkbox - vertical arrangement */
 	/* 	--voicestates_arrangement: row; */ /* checkbox - horizontal arrangement */
 	--voicestates_margin_top: 1em;
@@ -62,11 +60,11 @@
 	--username_border_radius: calc(1em * 3 / 14);
 	--username_color: #fff;
 	--username_font: gg sans;
-	--username_font_size: done; /* done - base - 14px */
+	--username_font_size: 14px; /* done - base - 14px */
 	--username_font_weight: 600;
 	--username_line_height: calc(93 / 70);
-	--username_box_max_width: done; /* done - mod - none - 100px */
-	--username_box_width: done; /* done - mod - auto - 100px */
+	--username_box_max_width: none; /* done - mod - none - 100px */
+	--username_box_width: auto; /* done - mod - auto - 100px */
 	--username_margin_top: 0em;
 	--username_margin_bottom: 0em;
 	--username_margin_left: calc(1em * 8 / 14);
