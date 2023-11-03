@@ -84,6 +84,34 @@ $(document).ready(async function () {
 						element_editable_element.val(element['default_base_value']);
 						option_parent_div.val(element_editable_element.val() || element['default_base_value']);
 					}
+					if (element['inherits_to']) {
+						// changed inherited options as well, if the element that was changed has an 'inherits_to' attribute
+						if (specific_option.is(':checked')) {
+							input_options_config_json.forEach((element_2) => {
+								if (element['inherits_to'] === element_2['css_property_key']) {
+									let option_2_parent_div = $(`#${element_2['css_property_key']}`);
+									let element_2_mod_checkbox_element = option_2_parent_div.children('input[name^="mod_checkbox_"]');
+									if (!element_2_mod_checkbox_element.is(':checked')) {
+										let element_2_editable_element = option_2_parent_div.children(`input[name="${element_2['css_property_key']}"]`);
+										element_2_editable_element.val(option_parent_div.val());
+										option_2_parent_div.val(element_2_editable_element.val());
+									}
+								}
+							});
+						} else {
+							input_options_config_json.forEach((element_2) => {
+								if (element['inherits_to'] === element_2['css_property_key']) {
+									let option_2_parent_div = $(`#${element_2['css_property_key']}`);
+									let element_2_mod_checkbox_element = option_2_parent_div.children('input[name^="mod_checkbox_"]');
+									if (!element_2_mod_checkbox_element.is(':checked')) {
+										let element_2_editable_element = option_2_parent_div.children(`input[name="${element_2['css_property_key']}"]`);
+										element_2_editable_element.val(element_2['default_base_value']);
+										option_2_parent_div.val(element_2_editable_element.val());
+									}
+								}
+							});
+						}
+					}
 				} else if (input_type === 'radio') {
 					option_parent_div.children().each(function () {
 						if ($(this).is(':checked')) {
@@ -117,7 +145,6 @@ $(document).ready(async function () {
 			if (!element['is_editable'] && !element['is_mod']) {
 				// set radio styles to default (select radio of default base value)
 				option_parent_div.children().each(function () {
-					// console.log($(this).val() === element['default_base_value']);
 					if ($(this).val() === element['default_base_value']) {
 						$(this).prop('checked', true);
 					}

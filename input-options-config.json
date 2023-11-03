@@ -47,7 +47,7 @@
 		"id": 3
 	},
 	{
-		"label_text": "custom avatar image",
+		"label_text": "avatar image",
 		"css_property_key": "avatar_content",
 		"default_base_value": "normal",
 		"default_mod_value": "url('https://cdn.discordapp.com/embed/avatars/1.png')",
@@ -56,7 +56,7 @@
 		"id": 9
 	},
 	{
-		"label_text": "custom speaking avatar image",
+		"label_text": "speaking avatar image",
 		"css_property_key": "avatar_speaking_content",
 		"default_base_value": "var(--inherited_avatar_content)",
 		"default_mod_value": "url('https://cdn.discordapp.com/embed/avatars/4.png')",
@@ -99,5 +99,27 @@
 		"is_mod": true,
 		"is_editable": false,
 		"id": 4
+	},
+	{
+		"label_text": "avatar border colour",
+		"css_property_key": "avatar_border_color",
+		"default_base_value": "rgba(0, 0, 0, 0)",
+		"default_mod_value": "#aa8ed6",
+		"is_mod": true,
+		"is_editable": true,
+		"inherits_to": "avatar_speaking_border_color",
+		"id": 11,
+		"unfinished": true
+	},
+	{
+		"label_text": "speaking avatar border colour",
+		"css_property_key": "avatar_speaking_border_color",
+		"default_base_value": "rgba(46, 204, 113, 0.95)",
+		"default_mod_value": "#fdcb58",
+		"is_mod": true,
+		"is_editable": true,
+		"inherits_from": "avatar_border_color",
+		"id": 12,
+		"unfinished": true
 	}
 ]

@@ -10,14 +10,16 @@
 :root {
 	--green: #2ecc71;
 	--red: #ed4245;
+	--yellow: #fdcb58;
+	--purple: #aa8ed6;
 	--grey_dark: #1e2124;
 	--green_dark: #3ba53b;
 	--grey_dark_transparent: rgba(30, 33, 36, 0.95);
 	--green_transparent: rgba(46, 204, 113, 0.95);
 
 	/* 		voice states */
-	--voicestates_vertical_align: start; /* done - base - start - [center, end] */
-	--voicestates_horizontal_align: left; /* done - base - left - [center, right] */
+	--voicestates_vertical_align: start; /* done - base - radio - start - [center, end] */
+	--voicestates_horizontal_align: left; /* done - base - radio - left - [center, right] */
 	--voicestates_arrangement: column; /* done - base - column - row */
 	--voicestates_margin_top: 1em;
 	--voicestates_margin_bottom: calc(1em * 3 / 7);
@@ -37,8 +39,8 @@
 
 	/* 		avatar */
 	--avatar_border_width: calc(var(--calculated_avatar_height_width) * 0.075);
-	--avatar_border_color: rgba(0, 0, 0, 0);
-	--avatar_speaking_border_color: rgba(46, 204, 113, 0.95); /* done - mod - rgba(46, 204, 113, 0.95) - var(--inherited_avatar_border_color) */
+	--avatar_border_color: rgba(0, 0, 0, 0); /* updating - mod - rgba(0, 0, 0, 0) - #aa8ed6 */
+	--avatar_speaking_border_color: rgba(46, 204, 113, 0.95); /* updating - mod - inherited - [rgba(46, 204, 113, 0.95), var(--inherited_avatar_border_color)] - #fdcb58 */
 	--avatar_border_radius: 50%;
 	--avatar_height: 50px;
 	--avatar_width: 50px;
