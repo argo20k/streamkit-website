@@ -58,6 +58,21 @@ $(document).ready(async function () {
 			let option_parent_div = $(`#${element['css_property_key']}`);
 			if (element['css_property_key'] === specific_option.attr('name')) {
 				option_parent_div.val(specific_option.val() || element['default_base_value']);
+				if (element['inherits_to']) {
+					input_options_config_json.forEach((inh_to_element) => {
+						if (inh_to_element['css_property_key'] === element['inherits_to']) {
+							let inh_to_option_parent_div = $(`#${inh_to_element['css_property_key']}`);
+							let inh_to_element_mod_checkbox_element = inh_to_option_parent_div.children('input[name^="mod_checkbox_"]');
+							let inh_element_editable_element = inh_to_option_parent_div.children(`input[name="${inh_to_element['css_property_key']}"]`);
+							if (!inh_to_element_mod_checkbox_element.is(':checked')) {
+								inh_element_editable_element.val(option_parent_div.val());
+								inh_to_option_parent_div.val(inh_element_editable_element.val());
+
+								console.log(inh_element_editable_element.attr('name'));
+							}
+						}
+					});
+				}
 			}
 		});
 	}
@@ -85,32 +100,38 @@ $(document).ready(async function () {
 						option_parent_div.val(element_editable_element.val() || element['default_base_value']);
 					}
 					if (element['inherits_to']) {
-						// changed inherited options as well, if the element that was changed has an 'inherits_to' attribute
-						if (specific_option.is(':checked')) {
-							input_options_config_json.forEach((element_2) => {
-								if (element['inherits_to'] === element_2['css_property_key']) {
-									let option_2_parent_div = $(`#${element_2['css_property_key']}`);
-									let element_2_mod_checkbox_element = option_2_parent_div.children('input[name^="mod_checkbox_"]');
-									if (!element_2_mod_checkbox_element.is(':checked')) {
-										let element_2_editable_element = option_2_parent_div.children(`input[name="${element_2['css_property_key']}"]`);
-										element_2_editable_element.val(option_parent_div.val());
-										option_2_parent_div.val(element_2_editable_element.val());
+						// handles default values for options that get inherited to other options
+						input_options_config_json.forEach((inh_to_element) => {
+							let inh_to_option_parent_div = $(`#${inh_to_element['css_property_key']}`);
+							let inh_to_element_mod_checkbox_element = inh_to_option_parent_div.children('input[name^="mod_checkbox_"]');
+							let inh_to_element_editable_element = inh_to_option_parent_div.children(`input[name="${inh_to_element['css_property_key']}"]`);
+							if (element['inherits_to'] === inh_to_element['css_property_key']) {
+								if (!inh_to_element_mod_checkbox_element.is(':checked')) {
+									if (specific_option.is(':checked')) {
+										inh_to_element_editable_element.val(option_parent_div.val());
+										inh_to_option_parent_div.val(inh_to_element_editable_element.val());
+									} else {
+										inh_to_element_editable_element.val(inh_to_element['default_base_value']);
+										inh_to_option_parent_div.val(inh_to_element_editable_element.val());
 									}
 								}
-							});
-						} else {
-							input_options_config_json.forEach((element_2) => {
-								if (element['inherits_to'] === element_2['css_property_key']) {
-									let option_2_parent_div = $(`#${element_2['css_property_key']}`);
-									let element_2_mod_checkbox_element = option_2_parent_div.children('input[name^="mod_checkbox_"]');
-									if (!element_2_mod_checkbox_element.is(':checked')) {
-										let element_2_editable_element = option_2_parent_div.children(`input[name="${element_2['css_property_key']}"]`);
-										element_2_editable_element.val(element_2['default_base_value']);
-										option_2_parent_div.val(element_2_editable_element.val());
+							}
+						});
+					}
+					if (element['inherits_from']) {
+						// handles default values for options that inheirt values from another option
+						input_options_config_json.forEach((inh_from_element) => {
+							let inh_from_option_parent_div = $(`#${inh_from_element['css_property_key']}`);
+							let inh_from_element_mod_checkbox_element = inh_from_option_parent_div.children('input[name^="mod_checkbox_"]');
+							if (element['inherits_from'] === inh_from_element['css_property_key']) {
+								if (inh_from_element_mod_checkbox_element.is(':checked')) {
+									if (!specific_option.is(':checked')) {
+										element_editable_element.val(inh_from_option_parent_div.val());
+										option_parent_div.val(element_editable_element.val());
 									}
 								}
-							});
-						}
+							}
+						});
 					}
 				} else if (input_type === 'radio') {
 					option_parent_div.children().each(function () {
