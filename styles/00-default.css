@@ -39,13 +39,13 @@
 
 	/* 		avatar */
 	--avatar_border_width: calc(var(--calculated_avatar_height_width) * 0.075);
-	--avatar_border_color: rgba(0, 0, 0, 0); /* updating - mod - rgba(0, 0, 0, 0) - #aa8ed6 */
-	--avatar_speaking_border_color: rgba(46, 204, 113, 0.95); /* updating - mod - inherited - [rgba(46, 204, 113, 0.95), var(--inherited_avatar_border_color)] - #fdcb58 */
+	--avatar_border_color: rgba(0, 0, 0, 0); /* done - mod - rgba(0, 0, 0, 0) - #aa8ed6 */
+	--avatar_speaking_border_color: rgba(46, 204, 113, 0.95); /* done - mod - inherited - [rgba(46, 204, 113, 0.95), var(--inherited_avatar_border_color)] - #fdcb58 */
 	--avatar_border_radius: 50%;
 	--avatar_height: 50px;
 	--avatar_width: 50px;
 	--avatar_content: normal; /* done - mod - normal - url('https://cdn.discordapp.com/embed/avatars/1.png') */
-	--avatar_speaking_content: var(--inherited_avatar_content); /* done - mod - var(--inherited_avatar_content) - url('https://cdn.discordapp.com/embed/avatars/4.png') */
+	--avatar_speaking_content: normal; /* done - mod - [normal, var(--inherited_avatar_content)] - url('https://cdn.discordapp.com/embed/avatars/4.png') */
 	--avatar_display: block; /* done - mod - block - none */
 
 	/* 		username */
