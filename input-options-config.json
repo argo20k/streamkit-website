@@ -95,7 +95,7 @@
 	},
 	{
 		"label_text": "hide usernames",
-		"css_property_key": "username_display",
+		"css_property_key": "name_display",
 		"default_base_value": "flex",
 		"default_mod_value": "none",
 		"is_mod": true,
