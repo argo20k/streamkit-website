@@ -92,7 +92,7 @@
 
 	/* 		icon mod */
 	--icon_display: none; /* updating - mod - none - block */
-	--icon_display: block;
+	/* --icon_display: block; */
 
 	/* 		filter mod */
 	/* --voicestate_filter: opacity(50%); */
