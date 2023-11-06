@@ -8,7 +8,7 @@
 */
 
 :root {
-	/* background-color: grey; */
+	background-color: grey;
 	--green: #2ecc71;
 	--red: #ed4245;
 	--yellow: #fdcb58;
@@ -76,10 +76,25 @@
 	--inherited_voicestates_horizontal_align: var(--voicestates_horizontal_align, left);
 	--inherited_avatar_border_color: var(--avatar_border_color, rgba(0, 0, 0, 0));
 	--inherited_avatar_content: var(--avatar_content, normal);
+	--inherited_username_background_color: var(--username_background_color, rgba(30, 33, 36, 0.95));
 	--inherited_username_box_max_width: var(--username_box_max_width, initial);
 	--inherited_username_box_width: var(--username_box_width, initial);
-	--inherited_username_background_color: var(--username_background_color, rgba(30, 33, 36, 0.95));
+	--inherited_username_margin_right: var(--username_margin_right, calc(8 / 14 * 1em));
 	--inherited_username_vertical_padding: var(--calculated_username_vertical_padding, calc(1em * 2 / 7));
+	overflow: hidden;
+
+	--username_display: block; /* updating - mod - block - none */
+	/* 	--username_display: none; */
+	--username_nickname_display: none; /* updating - mod - none - block */
+	/* 	--username_nickname_display: block; */
+	--username_nickname_text: 'CUSTOM_NICKNAME';
+
+	--icon_display: none; /* updating - mod - none - block */
+	--icon_display: block;
+}
+
+:root {
+	/* 		nickname mod */
 	--inherited_username_horizontal_padding: var(--calculated_username_horizontal_padding, calc(1em * 3 / 7));
 	--inherited_username_border_radius: var(--username_border_radius, calc(1em * 3 / 14));
 	--inherited_username_color: var(--username_color, #fff);
@@ -88,19 +103,22 @@
 	--inherited_username_margin_top: var(--username_margin_top, 0em);
 	--inherited_username_margin_bottom: var(--username_margin_bottom, 0em);
 	--inherited_username_margin_left: var(--username_margin_left, calc(8 / 14 * 1em));
-	--inherited_username_margin_right: var(--username_margin_right, calc(8 / 14 * 1em));
 	--inherited_username_text_overflow_style: var(--username_text_overflow_style, ellipsis);
 	--calculated_username_vertical_padding: calc(1em * 2 / 7);
 	--calculated_username_horizontal_padding: calc(1em * 3 / 7);
 	--calculated_username_max_width: calc(var(--inherited_username_box_max_width) - var(--calculated_username_horizontal_padding) * 2);
 	--calculated_username_width: calc(var(--inherited_username_box_width) - var(--calculated_username_horizontal_padding) * 2);
-	overflow: hidden;
 
-	--username_display: block; /* updating - mod - block - none */
-	/* --username_display: none; */
-	--username_nickname_display: none; /* updating - mod - none - block */
-	/* --username_nickname_display: block; */
-	--username_nickname_text: 'CUSTOM_NICKNAME';
+	/* 		icon mod */
+	--icon_mute_image: url('https://i.imgur.com/N41639K.png');
+	--icon_servermute_image: url('https://i.imgur.com/dGLktVK.png');
+	--icon_serverdeaf_image: url('https://i.imgur.com/PIzZueQ.png');
+	--icon_mute_deaf_image: url('https://i.imgur.com/MuYZsfA.png');
+	--icon_mute_serverdeaf_image: url('https://i.imgur.com/ahiYmuD.png');
+	--icon_servermute_deaf_image: url('https://i.imgur.com/B75U9Qo.png');
+	--icon_servermute_serverdeaf_image: url('https://i.imgur.com/cNJoKKP.png');
+	--inherited_username_line_height: var(--username_line_height, calc(93 / 70));
+	--calculated_username_box_height: calc(var(--inherited_username_line_height) * 1em + var(--inherited_username_vertical_padding) * 2);
 }
 
 div[class$='voice_container'] {
@@ -269,4 +287,57 @@ li[class$='voice_state'] span[class*='name'] {
 
 li[class$='voice_state'][class*='speaking'] span[class*='name'] {
 	background-color: var(--username_speaking_background_color, var(--inherited_username_background_color)) !important;
+}
+
+li[class$='voice_state'][class~='self_mute']:after,
+li[class$='voice_state'][class~='self_deaf']:after,
+li[class$='voice_state'][class~='mute']:after,
+li[class$='voice_state'][class~='deaf']:after {
+	background-repeat: no-repeat;
+	background-size: contain;
+	content: '';
+	display: var(--icon_display, block);
+	height: var(--calculated_username_box_height);
+	position: static;
+}
+
+li[class$='voice_state'][class~='self_mute']:after,
+li[class$='voice_state'][class~='mute']:after,
+li[class$='voice_state'][class~='deaf']:after {
+	width: var(--calculated_username_box_height);
+}
+
+li[class$='voice_state'][class~='self_mute']:after {
+	background-image: var(--icon_mute_image, url('https://i.imgur.com/N41639K.png'));
+}
+
+li[class$='voice_state'][class~='mute']:after {
+	background-image: var(--icon_servermute_image, url('https://i.imgur.com/dGLktVK.png'));
+}
+
+li[class$='voice_state'][class~='deaf']:after {
+	background-image: var(--icon_serverdeaf_image, url('https://i.imgur.com/PIzZueQ.png'));
+}
+
+li[class$='voice_state'][class~='self_mute'][class~='self_deaf']:after,
+li[class$='voice_state'][class~='self_mute'][class~='deaf']:after,
+li[class$='voice_state'][class~='mute'][class~='self_deaf']:after,
+li[class$='voice_state'][class~='mute'][class~='deaf']:after {
+	width: calc(var(--calculated_username_box_height) * 2 + var(--inherited_username_margin_right));
+}
+
+li[class$='voice_state'][class~='self_mute'][class~='self_deaf']:after {
+	background-image: var(--icon_mute_deaf_image, url('https://i.imgur.com/MuYZsfA.png'));
+}
+
+li[class$='voice_state'][class~='self_mute'][class~='deaf']:after {
+	background-image: var(--icon_mute_serverdeaf_image, url('https://i.imgur.com/ahiYmuD.png'));
+}
+
+li[class$='voice_state'][class~='mute'][class~='self_deaf']:after {
+	background-image: var(--icon_servermute_deaf_image, url('https://i.imgur.com/B75U9Qo.png'));
+}
+
+li[class$='voice_state'][class~='mute'][class~='deaf']:after {
+	background-image: var(--icon_servermute_serverdeaf_image, url('https://i.imgur.com/cNJoKKP.png'));
 }
