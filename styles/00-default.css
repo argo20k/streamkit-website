@@ -83,14 +83,26 @@
 	--inherited_username_vertical_padding: var(--calculated_username_vertical_padding, calc(1em * 2 / 7));
 	overflow: hidden;
 
+	/* 		nickname mod */
 	--username_display: block; /* updating - mod - block - none */
-	/* 	--username_display: none; */
+	/* --username_display: none; */
 	--username_nickname_display: none; /* updating - mod - none - block */
-	/* 	--username_nickname_display: block; */
+	/* --username_nickname_display: block; */
 	--username_nickname_text: 'CUSTOM_NICKNAME';
 
+	/* 		icon mod */
 	--icon_display: none; /* updating - mod - none - block */
 	--icon_display: block;
+
+	/* 		filter mod */
+	/* --voicestate_filter: opacity(50%); */
+	/* --voicestate_speaking_filter: opacity(100%); */
+	/* --avatar_filter: opacity(50%); */
+	/* --avatar_speaking_filter: opacity(100%); */
+	/* --username_filter: opacity(50%); */
+	/* --username_speaking_filter: opacity(100%); */
+	/* --icon_filter: opacity(50%); */
+	/* --icon_speaking_filter: opacity(100%); */
 }
 
 :root {
@@ -171,11 +183,16 @@ li[class$='voice_state'] {
 	height: fit-content;
 	margin-bottom: var(--voicestate_margin_bottom, calc(1em * 4 / 7));
 
+	filter: var(--voicestate_filter, none);
 	flex-direction: var(--voicestate_arrangement, row);
 	margin-right: var(--voicestate_margin_right, 1em);
 
 	/* 		recommended not to change */
 	align-items: center;
+}
+
+li[class$='voice_state'][class*='speaking'] {
+	filter: var(--voicestate_speaking_filter, none);
 }
 
 /* 		if and only if '--voicestate_display: none;' then '--voicestate_not_speaking_display: none;' */
@@ -190,7 +207,7 @@ li[class$='voice_state']:not([class*='speaking']) {
 	display: var(--voicestate_not_speaking_display, flex);
 }
 
-img[class$='avatar'] {
+li[class$='voice_state'] img[class$='avatar'] {
 	border: 3px solid rgba(0, 0, 0, 0);
 	border-radius: 50%;
 	display: block;
@@ -208,6 +225,7 @@ img[class$='avatar'] {
 	margin-right: 0;
 
 	content: var(--avatar_content, normal);
+	filter: var(--avatar_filter, none);
 	order: var(--voicestate_content_order, 0);
 }
 
@@ -217,19 +235,27 @@ li[class$='voice_state'][class*='speaking'] img[class$='avatar'] {
 	border-color: var(--avatar_speaking_border_color, var(--inherited_avatar_border_color));
 
 	content: var(--avatar_speaking_content, var(--inherited_avatar_content));
+	filter: var(--avatar_speaking_filter, none);
 }
 
-div[class$='username'] {
+li[class$='voice_state'] div[class$='username'] {
 	display: block;
 	padding-top: 18px;
 
 	display: var(--name_display, block);
 	padding-top: 0;
 
+	filter: var(--username_filter, none);
+
 	/* 		recommended not to change */
 	white-space: nowrap;
 }
 
+li[class$='voice_state'][class*='speaking'] div[class$='username'] {
+	filter: var(--username_speaking_filter, none);
+}
+
+/* 		nickname mod */
 li[class$='voice_state'] div[class$='username']:before {
 	display: block;
 	padding-top: 18px;
@@ -289,6 +315,7 @@ li[class$='voice_state'][class*='speaking'] span[class*='name'] {
 	background-color: var(--username_speaking_background_color, var(--inherited_username_background_color)) !important;
 }
 
+/* 		icons mod */
 li[class$='voice_state'][class~='self_mute']:after,
 li[class$='voice_state'][class~='self_deaf']:after,
 li[class$='voice_state'][class~='mute']:after,
@@ -297,6 +324,7 @@ li[class$='voice_state'][class~='deaf']:after {
 	background-size: contain;
 	content: '';
 	display: var(--icon_display, block);
+	filter: var(--icon_filter, none);
 	height: var(--calculated_username_box_height);
 	position: static;
 }
@@ -340,4 +368,8 @@ li[class$='voice_state'][class~='mute'][class~='self_deaf']:after {
 
 li[class$='voice_state'][class~='mute'][class~='deaf']:after {
 	background-image: var(--icon_servermute_serverdeaf_image, url('https://i.imgur.com/cNJoKKP.png'));
+}
+
+li[class$='voice_state'][class*='speaking'][class~='deaf']:after {
+	filter: var(--icon_speaking_filter, none);
 }
