@@ -8,7 +8,7 @@
 */
 
 :root {
-	background-color: grey;
+	/* background-color: grey; */
 	--green: #2ecc71;
 	--red: #ed4245;
 	--yellow: #fdcb58;
@@ -84,14 +84,16 @@
 	overflow: hidden;
 
 	/* 		nickname mod */
-	--username_display: block; /* updating - mod - block - none */
+	/* 	--username_display: block; */
+	/* 	--username_nickname_display: none; */
+	/*  */
 	/* --username_display: none; */
-	--username_nickname_display: none; /* updating - mod - none - block */
 	/* --username_nickname_display: block; */
-	--username_nickname_text: 'CUSTOM_NICKNAME';
+	/* --username_nickname_text: 'CUSTOM_NICKNAME'; */
 
 	/* 		icon mod */
-	--icon_display: none; /* updating - mod - none - block */
+	/* 	--icon_display: none; */
+	/*  */
 	/* --icon_display: block; */
 
 	/* 		filter mod */
@@ -103,6 +105,25 @@
 	/* --username_speaking_filter: opacity(100%); */
 	/* --icon_filter: opacity(50%); */
 	/* --icon_speaking_filter: opacity(100%); */
+
+	/* 		custom border mod */
+	/* 	--avatar_content: normal; */ /* default option */
+	/* 	--avatar_speaking_content: normal; */ /* default option */
+	/*  */
+	/* --avatar_content: url('https://i.imgur.com/oBV3r9L.png'); */
+	/* --avatar_speaking_content: url('https://i.imgur.com/lb8LA0u.png'); */
+	/* --custom_avatar_border_color: #aa8ed6; */
+	/* --custom_avatar_speaking_border_color: #fdcb58; */
+	/* --avatar_border_radius: 0; */
+	/* --avatar_border_color: rgba(0, 0, 0, 0); */
+	/* --avatar_speaking_border_color: rgba(0, 0, 0, 0); */
+	/* --avatar_filter: drop-shadow(var(--avatar_border_width, calc(var(--calculated_avatar_height_width) * 0.075)) 0 0 var(--custom_avatar_border_color, rgba(0, 0, 0, 0))) drop-shadow(0 var(--avatar_border_width, calc(var(--calculated_avatar_height_width) * 0.075)) 0 var(--custom_avatar_border_color, rgba(0, 0, 0, 0))) */
+	/* drop-shadow(calc(var(--avatar_border_width, calc(var(--calculated_avatar_height_width) * 0.075)) * -1) 0 0 var(--custom_avatar_border_color, rgba(0, 0, 0, 0))) */
+	/* drop-shadow(0 calc(var(--avatar_border_width, calc(var(--calculated_avatar_height_width) * 0.075)) * -1) 0 var(--custom_avatar_border_color, rgba(0, 0, 0, 0))); */
+	/* --avatar_speaking_filter: drop-shadow(var(--avatar_border_width, calc(var(--calculated_avatar_height_width) * 0.075)) 0 0 var(--custom_avatar_speaking_border_color, var(--inherited_custom_avatar_border_color))) */
+	/* drop-shadow(0 var(--avatar_border_width, calc(var(--calculated_avatar_height_width) * 0.075)) 0 var(--custom_avatar_speaking_border_color, var(--inherited_custom_avatar_border_color))) */
+	/* drop-shadow(calc(var(--avatar_border_width, calc(var(--calculated_avatar_height_width) * 0.075)) * -1) 0 0 var(--custom_avatar_speaking_border_color, var(--inherited_custom_avatar_border_color))) */
+	/* drop-shadow(0 calc(var(--avatar_border_width, calc(var(--calculated_avatar_height_width) * 0.075)) * -1) 0 var(--custom_avatar_speaking_border_color, var(--inherited_custom_avatar_border_color))); */
 }
 
 :root {
@@ -131,6 +152,9 @@
 	--icon_servermute_serverdeaf_image: url('https://i.imgur.com/cNJoKKP.png');
 	--inherited_username_line_height: var(--username_line_height, calc(93 / 70));
 	--calculated_username_box_height: calc(var(--inherited_username_line_height) * 1em + var(--inherited_username_vertical_padding) * 2);
+
+	/* 		custom bordermod */
+	--inherited_custom_avatar_border_color: var(--custom_avatar_border_color, rgba(0, 0, 0, 0));
 }
 
 div[class$='voice_container'] {
@@ -323,7 +347,7 @@ li[class$='voice_state'][class~='deaf']:after {
 	background-repeat: no-repeat;
 	background-size: contain;
 	content: '';
-	display: var(--icon_display, block);
+	display: var(--icon_display, none);
 	filter: var(--icon_filter, none);
 	height: var(--calculated_username_box_height);
 	position: static;
